@@ -6,6 +6,7 @@
       <img src="https://pinia.vuejs.org/logo.svg" alt="pinia logo">
       <h1>Pinia Tasks</h1>
     </header>
+
     <!-- new task form -->
     <div class="new-task-form">
       <TaskForm />
@@ -16,6 +17,9 @@
       <button @click="filter = 'all'">All tasks</button>
       <button @click="filter = 'favs'">Fav tasks</button>
     </nav>
+
+    <!-- loading -->
+    <div class="loading" v-if="taskStore.loading">Loading tasks...</div>
 
     <!-- task list -->
     <div class="task-list" v-if="filter === 'all'">
@@ -46,6 +50,8 @@ export default {
   setup() {
     const taskStore = useTaskStore()
 
+    // fetch tasks
+    taskStore.getTasks()
 
     const filter = ref('all')
 
